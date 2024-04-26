@@ -26,7 +26,7 @@ function returnFileName() {
 }
 
 function updateBackground() {
-  document.body.style.backgroundImage = "url('../assets/" + updateFileName() + ".png')";
+  document.body.style.backgroundImage = "url('../assets/" + updateFileName() + ".JPEG')";
 }
 
 function viewTurnRight() {
