@@ -1,10 +1,45 @@
+a, a:link, a:visited, a:hover, a:active {
+  color: black;
+  text-decoration: none;
+}
+
 body {
-  background: black url("https://static1.srcdn.com/wordpress/wp-content/uploads/2022/09/like-a-dragon-gaiden-kiryu-return.jpg");
+  background: black url("../assets/loading_scr.jpg");
   background-position: center 0;
   background-repeat: no-repeat;
   background-size: 1512px;
+  /*
+  transition: background-image 0.1s;
+  -webkit-transition: background-image 0.1s;
+  */
 }
 
+button {
+  background-color: transparent;
+  border: 0;
+  z-index: 950;
+  box-sizing: content-box;
+  padding: 0;
+}
+
+button:enabled:hover {
+  cursor: pointer;
+}
+
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+p {
+  display: block;
+  margin-block-start: 0px;
+  margin-block-end: 0px;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  unicode-bidi: isolate;
+}
 
 .alignCenter {
   margin-left: auto;
@@ -14,29 +49,213 @@ body {
   text-align: center;
 }
 
-.buttonView {
+.buttonDayNight {
+  bottom: 0px;
+}
 
+.buttonView {
+  left: 50%;
+  top: 360px;
 }
 
 .buttonView:has(#buttonViewLeft) {
-  float: left;
+  float: right;
+  transform: translateX(-756px);
 }
 
 .buttonView:has(#buttonViewRight) {
-  right: 0;
+  float: left;
+  transform: translateX(696px);
+}
+
+.buttonImageLeft {
+  content: url("../assets/btnL.png");
+}
+
+.buttonImageRight {
+  content: url("../assets/btnR.png");
+}
+
+button:enabled .buttonImageLeft:active {
+  content: url("../assets/btnL_press.png");
+}
+
+button:enabled .buttonImageRight:active {
+  content: url("../assets/btnR_press.png");
+}
+
+.buttonImageNavForward {
+  content: url("../assets/navBtnFw.png");
+}
+
+.buttonImageNavBackward {
+  content: url("../assets/navBtnBw.png");
+}
+
+.nighttime.buttonImageNavForward {
+  content: url("../assets/navBtnFw_Night.png");
+}
+
+.nighttime.buttonImageNavBackward {
+  content: url("../assets/navBtnBw_Night.png");
+}
+
+.buttonNavForward {
+  top: 560px;
+}
+
+.buttonNavBackward {
+  top: 640px;
 }
 
 .buttonPosition {
-  top: 500px;
-  right: 50px;
+  z-index: 0;
+  color: rgba(255, 0, 0, 0);
+  left: 50%;
+  -ms-transform: translateX(-44px);
+  transform: translateX(-44px);
 }
 
-.displayNone {
-  display: none;
+.buttonPosition>p {
+  position: absolute;
+  transform: translateX(40px);
+  bottom: 0;
+}
+
+.ffMetaWebProCondensed400 {
+  font-family: "ff-meta-web-pro-condensed", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 .flex {
   display: flex;
+}
+
+.infocard {
+  display: none;
+  z-index: 900;
+  margin: 0;
+  position: absolute;
+  top: 420px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 480px;
+  height: 451px;
+  background-color: rgba(255, 242, 242, 0.725)
+}
+
+.infocardBtn {
+  width: 180px;
+  height: 48px;
+  margin-left: 20px;
+  margin-right: 20px;
+  background: linear-gradient(90deg, rgba(217, 63, 0, 1) 30%, rgba(252, 158, 92, 1) 100%);
+}
+
+.infocardBtn:hover {
+  cursor: pointer;
+}
+
+.infocardBtnTxt {
+  display: flex;
+  height: inherit;
+  font-size: 18px;
+  color: white;
+  align-items: center;
+  margin: auto 16px;
+}
+
+.infocardDescr {
+  background-color: white;
+  margin-block-start: 0px;
+  margin-block-end: 0px;
+  padding: 24px 22px 30px 22px;
+  font-size: 18px;
+  line-height: 22px;
+  height: 88px;
+}
+
+.infocardFoot {
+  background-color: rgba(240, 108, 12, 0.475);
+  width: 480px;
+  height: 12px;
+  position: absolute;
+  top: 456px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.infocardHead {
+  height: 42px;
+  background-color: rgb(240, 108, 12);
+  color: white;
+  font-size: 22px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+}
+
+.infocardHeadContent {
+  width: 100%;
+  text-align: center;
+}
+
+.infocardImageUrl {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height: 219px;
+  content: url("../assets/loading_scr.jpg");
+}
+
+.mapMarker {
+  content: url("../assets/mapmarker_0.5x.png");
+}
+
+.mapMarker:has(+ .mapMarkerMask:enabled:hover) {
+  content: url("../assets/mapmarker_hover_0.5x.png");
+}
+
+.mapMarkerMask:enabled>div {
+  cursor: pointer;
+  background-color: rgba(255, 0, 0, 0);
+  width: 59px;
+  height: 82px;
+  top: 38px;
+  left: 15px;
+}
+
+
+.nighttime .infocardBody {
+  background-color: black;
+  color: white;
+}
+
+.nighttime .infocardContent {
+  background-color: rgb(44, 44, 44);
+}
+
+.nighttime .infocardDescr {
+  background-color: black;
+}
+
+.nighttime .infocardFoot {
+  background-color: rgb(44, 44, 44);
+}
+
+.nighttime .infocardHead {
+  background-color: rgb(180, 180, 180);
+  color: black;
+}
+
+.nighttime .infocardBtn {
+  background: rgb(24, 24, 24);
+}
+
+.nighttime .infocardFoot {
+  background-color: rgb(170, 170, 170);
+  z-index: 950;
 }
 
 .poabsolute {
@@ -55,3 +274,23 @@ body {
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
 }
+
+/*
+#mapMarkerOne {
+}
+
+#mapMarkerTwo {
+}
+
+#mapMarkerThree {
+}
+
+#mapMarkerFour {
+}
+
+#mapMarkerFive {
+}
+
+#mapMarkerSix {
+}
+*/

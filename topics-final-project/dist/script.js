@@ -1,19 +1,184 @@
+var images = [];
+function preload() {
+    for (var i = 0; i < arguments.length; i++) {
+        images[i] = new Image();
+        images[i].src = preload.arguments[i];
+    }
+}
+
+preload(
+  "infocardimg_01.jpg", "infocardimg_02.jpg", "infocardimg_03.jpg", "infocardimg_04.jpg", "infocardimg_05.jpg", "infocardimg_06.jpg", "infocardimg_07.jpg", "infocardimg_08.jpg", "infocardimg_09.jpg", "infocardimg_10.jpg", "infocardimg_11.jpg", "infocardimg_12.jpg", "../assets/bgALocation01View00.JPEG", "../assets/bgALocation01View01.JPEG", "../assets/bgALocation01View02.JPEG", "../assets/bgALocation01View03.JPEG", "../assets/bgALocation01View04.JPEG", "../assets/bgALocation01View05.JPEG", "../assets/bgALocation01View06.JPEG", "../assets/bgALocation01View07.JPEG", "../assets/bgALocation02View00.JPEG", "../assets/bgALocation02View01.JPEG", "../assets/bgALocation02View02.JPEG", "../assets/bgALocation02View03.JPEG", "../assets/bgALocation02View04.JPEG", "../assets/bgALocation02View05.JPEG", "../assets/bgALocation02View06.JPEG", "../assets/bgALocation02View07.JPEG", "../assets/bgALocation03View00.JPEG", "../assets/bgALocation03View01.JPEG", "../assets/bgALocation03View02.JPEG", "../assets/bgALocation03View03.JPEG", "../assets/bgALocation03View04.JPEG", "../assets/bgALocation03View05.JPEG", "../assets/bgALocation03View06.JPEG", "../assets/bgALocation03View07.JPEG", "../assets/bgALocation04View00.JPEG", "../assets/bgALocation04View01.JPEG", "../assets/bgALocation04View02.JPEG", "../assets/bgALocation04View03.JPEG", "../assets/bgALocation04View04.JPEG", "../assets/bgALocation04View05.JPEG", "../assets/bgALocation04View06.JPEG", "../assets/bgALocation04View07.JPEG", "../assets/bgALocation05View00.JPEG", "../assets/bgALocation05View01.JPEG", "../assets/bgALocation05View02.JPEG", "../assets/bgALocation05View03.JPEG", "../assets/bgALocation05View04.JPEG", "../assets/bgALocation05View05.JPEG", "../assets/bgALocation05View06.JPEG", "../assets/bgALocation05View07.JPEG", "../assets/bgALocation06View00.JPEG", "../assets/bgALocation06View01.JPEG", "../assets/bgALocation06View02.JPEG", "../assets/bgALocation06View03.JPEG", "../assets/bgALocation06View04.JPEG", "../assets/bgALocation06View05.JPEG", "../assets/bgALocation06View06.JPEG", "../assets/bgALocation06View07.JPEG", "../assets/bgPLocation01View00.JPEG", "../assets/bgPLocation01View01.JPEG", "../assets/bgPLocation01View02.JPEG", "../assets/bgPLocation01View03.JPEG", "../assets/bgPLocation01View04.JPEG", "../assets/bgPLocation01View05.JPEG", "../assets/bgPLocation01View06.JPEG", "../assets/bgPLocation01View07.JPEG", "../assets/bgPLocation02View00.JPEG", "../assets/bgPLocation02View01.JPEG", "../assets/bgPLocation02View02.JPEG", "../assets/bgPLocation02View03.JPEG", "../assets/bgPLocation02View04.JPEG", "../assets/bgPLocation02View05.JPEG", "../assets/bgPLocation02View06.JPEG", "../assets/bgPLocation02View07.JPEG", "../assets/bgPLocation03View00.JPEG", "../assets/bgPLocation03View01.JPEG", "../assets/bgPLocation03View02.JPEG", "../assets/bgPLocation03View03.JPEG", "../assets/bgPLocation03View04.JPEG", "../assets/bgPLocation03View05.JPEG", "../assets/bgPLocation03View06.JPEG", "../assets/bgPLocation03View07.JPEG", "../assets/bgPLocation04View00.JPEG", "../assets/bgPLocation04View01.JPEG", "../assets/bgPLocation04View02.JPEG", "../assets/bgPLocation04View03.JPEG", "../assets/bgPLocation04View04.JPEG", "../assets/bgPLocation04View05.JPEG", "../assets/bgPLocation04View06.JPEG", "../assets/bgPLocation04View07.JPEG", "../assets/bgPLocation05View00.JPEG", "../assets/bgPLocation05View01.JPEG", "../assets/bgPLocation05View02.JPEG", "../assets/bgPLocation05View03.JPEG", "../assets/bgPLocation05View04.JPEG", "../assets/bgPLocation05View05.JPEG", "../assets/bgPLocation05View06.JPEG", "../assets/bgPLocation05View07.JPEG", "../assets/bgPLocation06View00.JPEG", "../assets/bgPLocation06View01.JPEG", "../assets/bgPLocation06View02.JPEG", "../assets/bgPLocation06View03.JPEG", "../assets/bgPLocation06View04.JPEG", "../assets/bgPLocation06View05.JPEG", "../assets/bgPLocation06View06.JPEG", "../assets/bgPLocation06View07"
+);
+
+
+var sfxHover = new Audio('../assets/sfx_hover.wav');
+var sfxSelect = new Audio('../assets/sfx_select.wav');
+var sfxDayTime = new Audio('../assets/sfx_daytime.wav');
+var sfxNightTime = new Audio('../assets/sfx_nighttime.wav');
+var sfxMapMarker = new Audio('../assets/sfx_mapmarker.wav');
+var sfxReturn = new Audio('../assets/sfx_return.wav');
+
+var mapMarkerMasks = document.getElementsByClassName("mapMarkerMask");
+
+for (var i = 0; i < mapMarkerMasks.length; i++) {
+  mapMarkerMasks[i].addEventListener('mouseover', function () {sfxHover.play();}, false);
+  mapMarkerMasks[i].addEventListener('click', function () {sfxMapMarker.play();}, false);
+}
+
+
+
+function printMousePos(event) {
+  console.log((event.offsetX - 800) + ";" + (event.offsetY - 133));
+}
+
+const mousePosMask = document.getElementById("mousePos");
+mousePosMask.addEventListener("click", printMousePos);
+
+
 var isNightTime = false;
+
 var mapLocation = [1, 2, 3, 4, 5, 6];
 var mapView = [0, 1, 2, 3, 4, 5, 6, 7];
 var currentLocation = 1;
 var currentView = 0;
-
-function findPosIndex() {
-  return (1 + 8 * (currentLocation - 1)) + currentView;
-}
+var infoCardTitleIndex = ["Peachy's (5 Doyers St.)", "U.S. Post Office (6 Doyers St.)", "Apotheke Chinatown (9 Doyers St.)", "Blue Agave Pulquería NYC (11 Doyers St.)", "Nom Wah Tea Parlor (13–15 Doyers St.)", "Toy Apple Beauty & Barber Salon (16 Doyers St.)"];
+var infoCardImgIndex = ["infocardimg_01.jpg", "infocardimg_02.jpg", "infocardimg_03.jpg", "infocardimg_04.jpg", "infocardimg_05.jpg", "infocardimg_06.jpg", "infocardimg_07.jpg", "infocardimg_08.jpg", "infocardimg_09.jpg", "infocardimg_10.jpg", "infocardimg_11.jpg", "infocardimg_12.jpg"];
+var infoCardDescrIndex = ["A downstairs bar serving up craft cocktails and small bites with a funky, retro Asian flair. It's run by the proprietors of Chinese Tuxedo, a contemporary fine-dining restaurant offering traditional Chinese banquet dishes, reimagined for the modern palate.", "In the (un)likely event you're eating your heart out at Nom Wah <i>and</i> want to write home at the same time—with the Post Office right by your side, those postcards raving about the best dim sum of your life are as good as sent.", "An apothecary-themed bar with a vintage, speakeasy-like atmosphere. The host of many a number of private dinner events and live band performances, this off-the-beaten-path hideaway is a nightlife favorite among both locals and tourists.", "An underground happy hour restaurant and bar offering creative cocktails and nibbles that blend Mexican flavors with an American twist. Their vegetarian burritos are apparently really good—too bad I only eat meat.", "A vintage Hong Kong-style restaurant offering authentic, made-to-order dumplings and dim sum 7 days a week. Established in 1920, Nom Wah is currently the oldest continuously running restaurant in Manhattan's Chinatown.", "The iconic bend in Doyers Street, located at the heart of Chinatown. This one-block stretch is home to a plethora of small storefronts, eateries, and traditional Chinese businesses—a far cry from the historical roots from which it earned its name."];
+var infoCardTitle = infoCardTitleIndex[0];
+var infoCardImg = infoCardImgIndex[0];
+var infoCardDescr = infoCardDescrIndex[0];
 
 function returnPosIndex() {
-  console.log("Current positioning index: " + findPosIndex());
+  return (8 * (currentLocation - 1)) + currentView;
+}
+
+function convertPosIndexToDayNight() {
+  return isNightTime ? returnPosIndex() + 48 : returnPosIndex();
+}
+
+// X from left = 50%; Y from top = 0
+
+var tempArray = ["A", "B", "C"];
+
+var mapMarkerOnePositionXIndex = [10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, -417, 10000, 10000, 10000, 10000, 10000, 10000, 62, 10000, 10000, 10000, 10000, 10000, 300, -630, 10000, 10000, 10000, 10000, 10000, -300, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, -324, 10000, 10000, 10000, 10000, 10000, 10000, 460, -390, 10000, 10000, 10000, 10000, 10000, 496, -198, 10000, 10000, 10000, 10000, 493, -312, 10000, 10000, 10000, 10000, 10000, 495, -364, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000];
+var mapMarkerOnePositionYIndex = [10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 415, 10000, 10000, 10000, 10000, 10000, 10000, 385, 10000, 10000, 10000, 10000, 10000, 430, 452, 10000, 10000, 10000, 10000, 10000, 588, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 444, 10000, 10000, 10000, 10000, 10000, 10000, 463, 463, 10000, 10000, 10000, 10000, 10000, 517, 509, 10000, 10000, 10000, 10000, 550, 557, 10000, 10000, 10000, 10000, 10000, 528, 551, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000];
+var mapMarkerTwoPositionXIndex = [-31, -701, 10000, 10000, 10000, 10000, 10000, 608, 118, -494, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 428, -58, -482, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 480, -333, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 162, -522, 10000, 10000, 10000, 10000, 10000, 626, 419, -426, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 245, 269, -581, -630, 10000, 10000, 10000, 10000, 10000, 10000, -98, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000];
+var mapMarkerTwoPositionYIndex = [405, 431, 10000, 10000, 10000, 10000, 10000, 399, 448, 437, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 301, 357, 342, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 377, 387, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 478, 503, 10000, 10000, 10000, 10000, 10000, 473, 441, 451, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 374, 400, 433, 439, 10000, 10000, 10000, 10000, 10000, 10000, 503, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000];
+var mapMarkerThreePositionXIndex = [10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, -220, 10000, 10000, 10000, 10000, 10000, 10000, 244, 10000, 10000, 10000, 10000, 10000, 10000, 10000, -738, 10000, 10000, 10000, 10000, -150, 10000, 10000, 10000, 10000, 10000, 10000, 10000, -64, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, -251, 10000, 10000, 10000, 10000, 10000, 10000, 537, -61, 10000, 10000, 10000, 10000, 10000, 10000, 90, 10000, 10000, 10000, 10000, 10000, 616, -308, 10000, 10000, 10000, 10000, 10000, -174, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 142, 10000, 10000, 10000];
+var mapMarkerThreePositionYIndex = [10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 379, 10000, 10000, 10000, 10000, 10000, 10000, 343, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 164, 10000, 10000, 10000, 10000, 485, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 401, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 442, 10000, 10000, 10000, 10000, 10000, 10000, 451, 397, 10000, 10000, 10000, 10000, 10000, 10000, 479, 10000, 10000, 10000, 10000, 10000, 462, 462, 10000, 10000, 10000, 10000, 10000, 505, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 413, 10000, 10000, 10000];
+var mapMarkerFourPositionXIndex = [10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, -342, 10000, 10000, 10000, 10000, 10000, 10000, 373, -95, 10000, 10000, 10000, 10000, 10000, 10000, 384, -544, 10000, 10000, 10000, 10000, 10000, 10000, 142, 10000, 10000, 10000, 10000, 76, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, -176, 10000, 10000, 10000, 10000, 10000, 10000, 638, 114, 10000, 10000, 10000, 10000, 10000, 10000, 289, 10000, 10000, 10000, 10000, 10000, 10000, 523, -202, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 202, 10000, 10000, 10000];
+var mapMarkerFourPositionYIndex = [10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 439, 10000, 10000, 10000, 10000, 10000, 10000, 373, 357, 10000, 10000, 10000, 10000, 10000, 10000, 325, 323, 10000, 10000, 10000, 10000, 10000, 10000, 277, 10000, 10000, 10000, 10000, 506, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 426, 10000, 10000, 10000, 10000, 10000, 10000, 446, 399, 10000, 10000, 10000, 10000, 10000, 10000, 464, 10000, 10000, 10000, 10000, 10000, 10000, 419, 426, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 397, 10000, 10000, 10000];
+var mapMarkerFivePositionXIndex = [10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, -268, 10000, 10000, 10000, 10000, 10000, 10000, 459, 46, -581, 10000, 10000, 10000, 10000, 10000, 582, 19, -680, 10000, 10000, 10000, 10000, 10000, 540, 10000, 10000, 10000, 10000, 176, -668, 10000, 10000, 10000, 10000, 10000, 10000, 70, -749, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, -40, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 333, -590, 10000, 10000, 10000, 10000, 10000, 527, -359, 10000, 10000, 10000, 10000, 10000, 10000, 398, 10000, 10000, 10000, 10000, 72, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 264, 10000, 10000, 10000];
+var mapMarkerFivePositionYIndex = [10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 419, 10000, 10000, 10000, 10000, 10000, 10000, 358, 367, 397, 10000, 10000, 10000, 10000, 10000, 319, 336, 317, 10000, 10000, 10000, 10000, 10000, 263, 10000, 10000, 10000, 10000, 483, 460, 10000, 10000, 10000, 10000, 10000, 10000, 482, 517, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 403, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 371, 390, 10000, 10000, 10000, 10000, 10000, 439, 364, 10000, 10000, 10000, 10000, 10000, 10000, 418, 10000, 10000, 10000, 10000, 465, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 392, 10000, 10000, 10000];
+var mapMarkerSixPositionXIndex = [10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 139, 10000, 10000, 10000, 10000, 10000, 10000, 613, 229, -585, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, -128, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, -201, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 234, -596, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 59, 10000, 10000, 10000];
+var mapMarkerSixPositionYIndex = [10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 333, 10000, 10000, 10000, 10000, 10000, 10000, 213, 188, 143, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 413, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 431, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 413, 405, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 391, 10000, 10000, 10000];
+
+
+var mapMarkerOnePositionX = tempArray[0];
+
+
+/*
+var mapMarkerOnePositionX = mapMarkerOnePositionXIndex[0];
+var mapMarkerOnePositionY = mapMarkerOnePositionYIndex[0];
+var mapMarkerTwoPositionX = mapMarkerTwoPositionXIndex[0];
+var mapMarkerTwoPositionY = mapMarkerTwoPositionYIndex[0];
+var mapMarkerThreePositionX = mapMarkerThreePositionXIndex[0];
+var mapMarkerThreePositionY = mapMarkerThreePositionYIndex[0];
+var mapMarkerFourPositionX = mapMarkerFourPositionXIndex[0];
+var mapMarkerFourPositionY = mapMarkerFourPositionYIndex[0];
+var mapMarkerFivePositionX = mapMarkerFivePositionXIndex[0];
+var mapMarkerFivePositionY = mapMarkerFivePositionYIndex[0];
+var mapMarkerSixPositionX = mapMarkerSixPositionXIndex[0];
+var mapMarkerSixPositionY = mapMarkerSixPositionYIndex[0];
+*/
+
+
+function updateIndexVariables() {
+  mapMarkerOnePositionX = mapMarkerOnePositionXIndex[convertPosIndexToDayNight()];
+  mapMarkerOnePositionY = mapMarkerOnePositionYIndex[convertPosIndexToDayNight()];
+  mapMarkerTwoPositionX = mapMarkerTwoPositionXIndex[convertPosIndexToDayNight()];
+  mapMarkerTwoPositionY = mapMarkerTwoPositionYIndex[convertPosIndexToDayNight()];
+  mapMarkerThreePositionX = mapMarkerThreePositionXIndex[convertPosIndexToDayNight()];
+  mapMarkerThreePositionY = mapMarkerThreePositionYIndex[convertPosIndexToDayNight()];
+  mapMarkerFourPositionX = mapMarkerFourPositionXIndex[convertPosIndexToDayNight()];
+  mapMarkerFourPositionY = mapMarkerFourPositionYIndex[convertPosIndexToDayNight()];
+  mapMarkerFivePositionX = mapMarkerFivePositionXIndex[convertPosIndexToDayNight()];
+  mapMarkerFivePositionY = mapMarkerFivePositionYIndex[convertPosIndexToDayNight()];
+  mapMarkerSixPositionX = mapMarkerSixPositionXIndex[convertPosIndexToDayNight()];
+  mapMarkerSixPositionY = mapMarkerSixPositionYIndex[convertPosIndexToDayNight()];
+}
+
+function updateMapMarkerLocation() {
+  updateIndexVariables();
+  document.getElementById("mapMarkerOne").style.transform = `translate(${mapMarkerOnePositionX}px, ${mapMarkerOnePositionY}px)`;
+  document.getElementById("mapMarkerTwo").style.transform = `translate(${mapMarkerTwoPositionX}px, ${mapMarkerTwoPositionY}px)`;
+  document.getElementById("mapMarkerThree").style.transform = `translate(${mapMarkerThreePositionX}px, ${mapMarkerThreePositionY}px)`;
+  document.getElementById("mapMarkerFour").style.transform = `translate(${mapMarkerFourPositionX}px, ${mapMarkerFourPositionY}px)`;
+  document.getElementById("mapMarkerFive").style.transform = `translate(${mapMarkerFivePositionX}px, ${mapMarkerFivePositionY}px)`;
+  document.getElementById("mapMarkerSix").style.transform = `translate(${mapMarkerSixPositionX}px, ${mapMarkerSixPositionY}px)`;
+}
+
+function showViewButtons() {
+  document.getElementById("buttonViewLeftContainer").style.display = "initial";
+  document.getElementById("buttonViewRightContainer").style.display = "initial";
+  document.getElementById("buttonDayNight").style.display = "initial";
+  document.getElementById("mapMarkerOne").style.display = "initial";
+  document.getElementById("mapMarkerTwo").style.display = "initial";
+  document.getElementById("mapMarkerThree").style.display = "initial";
+  document.getElementById("mapMarkerFour").style.display = "initial";
+  document.getElementById("mapMarkerFive").style.display = "initial";
+  document.getElementById("mapMarkerSix").style.display = "initial";
+}
+
+function showHideNavButtons() {
+  // only show navigation buttons on views 0 and 4
+
+  const getButtonLocation = document.getElementsByClassName("buttonLocation");
+
+  if (currentView === 0 || currentView === 4) {
+    for (let i = 0; i < getButtonLocation.length; i++) {
+      getButtonLocation[i].style.display = "initial";
+    }
+  } else {
+    for (let i = 0; i < getButtonLocation.length; i++) {
+      getButtonLocation[i].style.display = "none";
+    }
+  }
+
+  // hide navigation buttons if you can't go forward or back any further
+
+  if ((currentLocation === 1 && currentView === 4) || (currentLocation === 6 && currentView === 0)) {
+    document.getElementById("buttonNavForward").style.display = "none";
+  }
+  if ((currentLocation === 1 && currentView === 0) || (currentLocation === 6 && currentView === 4)) {
+    document.getElementById("buttonNavBackward").style.display = "none";
+  }
+}
+
+function closeInfoCard() {
+  const buttons = document.getElementsByTagName("button");
+  document.getElementById("infocard").style.display = "none";
+  for (const button of buttons) {
+    button.disabled = false;
+  }
+  sfxReturn.play();
+}
+
+function openInfoCard() {
+  const buttons = document.getElementsByTagName("button");
+  document.getElementById("infocard").style.display = "initial";
+  for (const button of buttons) {
+    button.disabled = true;
+  }
+  document.getElementById("infocardBtnClose").removeAttribute("disabled");
+}
+
+function logPosIndex() {
+  console.log("Current positioning index: " + returnPosIndex());
 }
 
 function checkNightTime() {
-  return isNightTime ? "P" : "A"; 
+  return isNightTime ? "P" : "A";
 }
 
 function updateFileName() {
@@ -21,12 +186,32 @@ function updateFileName() {
 }
 
 function returnFileName() {
-  console.log(updateFileName());
-  returnPosIndex();
+  // console.log(updateFileName());
+  // logPosIndex();
 }
 
 function updateBackground() {
-  document.body.style.backgroundImage = "url('../assets/" + updateFileName() + ".JPEG')";
+  document.body.style.cssText += `background-image: url(${'../assets/' + updateFileName() + '.JPEG'})`;
+  // console.log("Background updated.");
+  showHideNavButtons();
+  updateMapMarkerLocation();
+}
+
+function updateInfoCard() {
+  document.getElementById("infocardHeadContent").innerHTML = `${infoCardTitle}`;
+  document.getElementById("infocardDescrContent").innerHTML = `${infoCardDescr}`;
+  document.getElementById("infocardImageUrl").style.cssText += `content: url(${'../assets/' + infoCardImg})`;
+}
+
+function toggleDayNight() {
+  isNightTime = !isNightTime;
+  console.log("Switched to " + checkNightTime() + ".M.")
+  document.getElementById("infocard").classList.toggle("nighttime");
+  document.getElementById("buttonImageNavForward").classList.toggle("nighttime");
+  document.getElementById("buttonImageNavBackward").classList.toggle("nighttime");
+  updateBackground();
+  updateInfoCard();
+  isNightTime ? sfxNightTime.play() : sfxDayTime.play();
 }
 
 function viewTurnRight() {
@@ -37,6 +222,7 @@ function viewTurnRight() {
   // console.log(currentView);
   returnFileName();
   updateBackground();
+  sfxSelect.play();
 }
 
 function viewTurnLeft() {
@@ -47,32 +233,141 @@ function viewTurnLeft() {
   // console.log(currentView);
   returnFileName();
   updateBackground();
+  sfxSelect.play();
+}
+
+function addLocation() {
+  if (currentLocation === mapLocation.length) {
+    // console.log("You can't move forward any further.");
+  } else {
+    mapLocation[currentLocation++];
+    // console.log("After moving forward, you are at location 0" + currentLocation);
+  }
+}
+
+function subtractLocation() {
+  if (currentLocation === 1) {
+    // console.log("You can't move backward any further.");
+  } else {
+    mapLocation[currentLocation--];
+    // console.log("After moving backward, you are at location 0" + currentLocation);
+  }
 }
 
 function locMoveBackward() {
   // console.log("Before moving backward, you are at " + currentLocation);
-  if (currentLocation === 1) {
-    console.log(
-      "You can't move backward any further."
-    );
-  } else {
-    mapLocation[currentLocation--];
-    console.log("After moving backward, you are at location 0" + currentLocation);
+  if (currentView === 0) {
+    subtractLocation();
+  } else if (currentView === 4) {
+    addLocation();
   }
   returnFileName();
   updateBackground();
+  sfxSelect.play();
 }
 
 function locMoveForward() {
   // console.log("Before moving forward, you are at " + currentLocation);
-    if (currentLocation === mapLocation.length) {
-    console.log(
-      "You can't move forward any further."
-    );
-  } else {
-    mapLocation[currentLocation++];
-    console.log("After moving forward, you are at location 0" + currentLocation);
+  if (currentView === 0) {
+    addLocation();
+  } else if (currentView === 4) {
+    subtractLocation();
   }
   returnFileName();
   updateBackground();
+  sfxSelect.play();
+}
+
+function mapMarkerClick() {
+  openInfoCard();
+  console.log("You just clicked on a map marker!");
+}
+
+function returnTitleIndex(titleIndex) {
+  return isNightTime ? titleIndex + 6 : titleIndex;
+}
+
+function locationOne() {
+  infoCardTitle = infoCardTitleIndex[returnTitleIndex(0)];
+  infoCardImg = infoCardImgIndex[returnTitleIndex(0)];
+  infoCardDescr = infoCardDescrIndex[returnTitleIndex(0)];
+  // console.log("Changed to location 1");
+  updateInfoCard();
+}
+
+function locationTwo() {
+  infoCardTitle = infoCardTitleIndex[returnTitleIndex(1)];
+  infoCardImg = infoCardImgIndex[returnTitleIndex(1)];
+  infoCardDescr = infoCardDescrIndex[returnTitleIndex(1)];
+  console.log("Changed to location 2");
+  updateInfoCard();
+}
+
+function locationThree() {
+  infoCardTitle = infoCardTitleIndex[returnTitleIndex(2)];
+  infoCardImg = infoCardImgIndex[returnTitleIndex(2)];
+  infoCardDescr = infoCardDescrIndex[returnTitleIndex(2)];
+  console.log("Changed to location 3");
+  updateInfoCard();
+}
+
+function locationFour() {
+  infoCardTitle = infoCardTitleIndex[returnTitleIndex(3)];
+  infoCardImg = infoCardImgIndex[returnTitleIndex(3)];
+  infoCardDescr = infoCardDescrIndex[returnTitleIndex(3)];
+  console.log("Changed to location 4");
+  updateInfoCard();
+}
+
+function locationFive() {
+  infoCardTitle = infoCardTitleIndex[returnTitleIndex(4)];
+  infoCardImg = infoCardImgIndex[returnTitleIndex(4)];
+  infoCardDescr = infoCardDescrIndex[returnTitleIndex(4)];
+  console.log("Changed to location 5");
+  updateInfoCard();
+}
+
+function locationSix(event) {
+  infoCardTitle = infoCardTitleIndex[returnTitleIndex(5)];
+  infoCardImg = infoCardImgIndex[returnTitleIndex(5)];
+  infoCardDescr = infoCardDescrIndex[returnTitleIndex(5)];
+  console.log("Changed to location 6");
+  updateInfoCard();
+}
+
+
+document.body.onkeydown = function (e) {
+  if (e.key == "E" ||
+    e.code == "KeyE" ||
+    e.keyCode == 69
+  ) {
+    console.log("10000;10000");
+  }
+}
+
+document.body.onkeyup = function (e) {
+  if (e.key == "a" ||
+    e.code == "KeyA" ||
+    e.keyCode == 65
+  ) {
+    viewTurnLeft();
+  }
+  if (e.key == "w" ||
+    e.code == "KeyW" ||
+    e.keyCode == 87
+  ) {
+    locMoveForward();
+  }
+  if (e.key == "s" ||
+    e.code == "KeyS" ||
+    e.keyCode == 83
+  ) {
+    locMoveBackward();
+  }
+  if (e.key == "d" ||
+    e.code == "KeyD" ||
+    e.keyCode == 68
+  ) {
+    viewTurnRight();
+  }
 }
