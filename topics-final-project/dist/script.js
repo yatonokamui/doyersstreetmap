@@ -91,6 +91,9 @@ var minimapPointerPositionYIndex = [220, 178, 120, 90, 57, 26];
 var minimapPointerPositionX = minimapPointerPositionXIndex[0];
 var minimapPointerPositionY = minimapPointerPositionYIndex[0];
 
+var learnMoreLinkIndex = ["https://www.peachys.nyc/", "https://new-york.postofficehours.us/new-york/CHINATOWN/6-DOYERS-ST-10013/", "https://www.apothekemixology.com/location/nyc-apotheke/", "https://blueagavenyc.com/", "https://nomwah.com/chinatown/", "https://www.yelp.com/biz/toy-apple-beauty-and-barber-salon-new-york", "https://forward.com/culture/134950/the-night-new-york-s-chinese-went-out-for-jews/", "https://books.google.com/books?id=KEwe-UMAYWEC&pg=PA106#v=onepage&q&f=false", "https://bedfordandbowery.com/2020/01/9-doyers-street-and-the-gangs-of-new-york-scorsese-didnt-tell-us-about/", "https://fortamsterdamnyc.blogspot.com/2014/04/block-party-doyers-street-between-pell.html", "https://www.nytimes.com/2011/04/13/dining/reviews/13under.html", "https://www.sixthtone.com/news/1011144"];
+var learnMoreLink = learnMoreLinkIndex[0];
+
 
 function updateIndexVariables() {
   mapMarkerOnePositionX = mapMarkerOnePositionXIndex[convertPosIndexToDayNight()];
@@ -205,6 +208,7 @@ function updateInfoCard() {
   document.getElementById("infocardHeadContent").innerHTML = `${infoCardTitle}`;
   document.getElementById("infocardDescrContent").innerHTML = `${infoCardDescr}`;
   document.getElementById("infocardImageUrl").style.cssText += `content: url(${'../assets/' + infoCardImg})`;
+  document.getElementById("infocardBtnLearnMore").setAttribute("href", learnMoreLink);
 }
 
 function toggleDayNight() {
@@ -298,7 +302,8 @@ function locationOne() {
   infoCardTitle = infoCardTitleIndex[returnTitleIndex(0)];
   infoCardImg = infoCardImgIndex[returnTitleIndex(0)];
   infoCardDescr = infoCardDescrIndex[returnTitleIndex(0)];
-  // console.log("Changed to location 1");
+  learnMoreLink = learnMoreLinkIndex[returnTitleIndex(0)];
+  console.log("Changed to location 1");
   updateInfoCard();
 }
 
@@ -306,6 +311,7 @@ function locationTwo() {
   infoCardTitle = infoCardTitleIndex[returnTitleIndex(1)];
   infoCardImg = infoCardImgIndex[returnTitleIndex(1)];
   infoCardDescr = infoCardDescrIndex[returnTitleIndex(1)];
+  learnMoreLink = learnMoreLinkIndex[returnTitleIndex(1)];
   console.log("Changed to location 2");
   updateInfoCard();
 }
@@ -314,6 +320,7 @@ function locationThree() {
   infoCardTitle = infoCardTitleIndex[returnTitleIndex(2)];
   infoCardImg = infoCardImgIndex[returnTitleIndex(2)];
   infoCardDescr = infoCardDescrIndex[returnTitleIndex(2)];
+  learnMoreLink = learnMoreLinkIndex[returnTitleIndex(2)];
   console.log("Changed to location 3");
   updateInfoCard();
 }
@@ -322,6 +329,7 @@ function locationFour() {
   infoCardTitle = infoCardTitleIndex[returnTitleIndex(3)];
   infoCardImg = infoCardImgIndex[returnTitleIndex(3)];
   infoCardDescr = infoCardDescrIndex[returnTitleIndex(3)];
+  learnMoreLink = learnMoreLinkIndex[returnTitleIndex(3)];
   console.log("Changed to location 4");
   updateInfoCard();
 }
@@ -330,14 +338,16 @@ function locationFive() {
   infoCardTitle = infoCardTitleIndex[returnTitleIndex(4)];
   infoCardImg = infoCardImgIndex[returnTitleIndex(4)];
   infoCardDescr = infoCardDescrIndex[returnTitleIndex(4)];
+  learnMoreLink = learnMoreLinkIndex[returnTitleIndex(4)];
   console.log("Changed to location 5");
   updateInfoCard();
 }
 
-function locationSix(event) {
+function locationSix() {
   infoCardTitle = infoCardTitleIndex[returnTitleIndex(5)];
   infoCardImg = infoCardImgIndex[returnTitleIndex(5)];
   infoCardDescr = infoCardDescrIndex[returnTitleIndex(5)];
+  learnMoreLink = learnMoreLinkIndex[returnTitleIndex(5)];
   console.log("Changed to location 6");
   updateInfoCard();
 }
