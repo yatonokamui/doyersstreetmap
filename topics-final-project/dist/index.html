@@ -9,10 +9,17 @@
 </head>
 
 <body onload="preload(); updateBackground(); updateInfoCard(); showViewButtons();">
+  <div id="clickhere" class="poabsolute" style="top: 120px; left: 50%; transform: translateX(400px); display: none;">
+    <img src="../assets/clickhere.png" width="200">
+  </div>
   <div id="mousePos"
-    style="display: none; width: 1512px; height: 851px; position: absolute; left: 50%; top: 0%; background: rgba(255,0,0,0); transform: translateX(-50%)">
+    style="width: 1512px; height: 851px; position: absolute; left: 50%; top: 0%; background: rgba(255,0,0,0); transform: translateX(-50%)">
   </div>
   <!-- partial:index.partial.html -->
+  <div class="minimapContainer" id="minimapContainer" style="display: none;">
+    <img class="minimap poabsolute" id="minimap" width="256">
+    <img class="minimapPointer poabsolute" id="minimapPointer" width="24">
+  </div>
   <div class="infocard" id="infocard">
     <div class="infocardContent">
       <div class="infocardHead ffMetaWebProCondensed400">
@@ -28,7 +35,7 @@
         </div>
       </div>
       <div class="flex" style="align-items: center; justify-content: center;">
-        <a target="_blank" rel="noopener noreferrer" href="https://youtu.be/dQw4w9WgXcQ"
+        <a t5arget="_blank" rel="noopener noreferrer" href="https://youtu.be/dQw4w9WgXcQ"
           class="infocardBtn infocardBtnLearnMore ffMetaWebProCondensed400" id="infocardBtnLearnMore">
           <p class="infocardBtnTxt">Learn More</p>
         </a>
@@ -43,7 +50,7 @@
 
   <div class="poabsolute buttonDayNight" id="buttonDayNight" style="display: none;">
     <button onclick="toggleDayNight()">
-      <img src="https://www.iconarchive.com/download/i103368/paomedia/small-n-flat/clock.1024.png" width="128">
+      <img id="buttonDayNightGraphic" width="128">
     </button>
   </div>
   <div class="poabsolute buttonView" id="buttonViewLeftContainer" style="display: none;">

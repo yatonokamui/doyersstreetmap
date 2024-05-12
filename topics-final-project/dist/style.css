@@ -50,8 +50,57 @@ p {
 }
 
 .buttonDayNight {
-  bottom: 0px;
+  top: 16px;
+  left: 50%;
+  transform: translateX(600px);
 }
+
+
+#buttonDayNightGraphic {
+  -webkit-transition-duration: 0.2s;
+  -moz-transition-duration: 0.2s;
+  -o-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+  -webkit-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  transform: rotate(0deg);
+  content: url("../assets/clock_button.png");
+}
+
+#buttonDayNightFrame {
+  content: url("../assets/clock_frame.png");
+}
+
+#buttonDayNightGraphic:hover {
+  -webkit-transition-duration: 0.2s;
+  -moz-transition-duration: 0.2s;
+  -o-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+  -webkit-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+
+.nighttime#buttonDayNightGraphic {
+  -webkit-transition-duration: 0.2s;
+  -moz-transition-duration: 0.2s;
+  -o-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+  content: url("../assets/clock_button_Night.png");
+}
+
+.nighttime#buttonDayNightGraphic:hover {
+  -webkit-transition-duration: 0.2s;
+  -moz-transition-duration: 0.2s;
+  -o-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+  -webkit-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+
 
 .buttonView {
   left: 50%;
@@ -226,6 +275,25 @@ button:enabled .buttonImageRight:active {
   left: 15px;
 }
 
+.minimapContainer {
+  position: absolute;
+  left: 50%;
+  top: 16px;
+  transform: translateX(-720px);
+}
+
+.minimapPointer {
+  content: url("../assets/minimap_figure.png");
+  top: -20px;
+}
+
+#minimap {
+  content: url("../assets/minimap_day.png");
+}
+
+.nighttime#minimap {
+  content: url("../assets/minimap_night.png");
+}
 
 .nighttime .infocardBody {
   background-color: black;
